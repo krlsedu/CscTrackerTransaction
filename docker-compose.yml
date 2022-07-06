@@ -1,0 +1,17 @@
+version: '3'
+
+networks:
+  backend:
+    external: true
+
+services:
+  csctracker:
+    container_name: csc-tracker-transaction
+    hostname: csc-tracker-transaction
+    image: krlsedu/csctracker-transaction
+    restart: always
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+    networks:
+      - backend
+    entrypoint: "java -Djava.security.egd=file:/dev/./urandom -jar app.jar"
